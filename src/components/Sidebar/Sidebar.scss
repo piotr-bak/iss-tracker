@@ -1,0 +1,11 @@
+.sidebar {
+    position: absolute;
+    width: 100px;
+    height: 300px;
+    left: 100px;
+    top: 100px;
+    z-index: 20;
+    background-color: rgb(78, 78, 78);
+    border: 5px solid orange;
+    border-radius: 10px;
+}
