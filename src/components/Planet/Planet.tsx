@@ -149,7 +149,7 @@ export function Planet() {
     // }
 
     const colorInterpolator = (t: number) =>
-        `rgba(255,255,255,${Math.sqrt(1 - t)})`;
+        `rgba(70,130,180,${Math.sqrt(1 - t)})`;
 
     useEffect(() => {
         const loader = new FBXLoader();
