@@ -1,7 +1,10 @@
 import { useState, useMemo, useEffect, useRef, SetStateAction } from "react";
 import * as satellite from "satellite.js";
+// import booleanPointInPolygon from "@turf/boolean-point-in-polygon";
+// import * as turf from "@turf/helpers";
 import * as THREE from "three";
 import Globe from "react-globe.gl";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 //import { useFetch } from "../../hooks/useFetch.ts";
 
 type RingSettings = {
@@ -22,7 +25,9 @@ export function Planet() {
     const [globeRadius, setGlobeRadius] = useState("");
     const [ringsData, setRingsData] = useState<RingSettings[]>();
     const [countries, setCountries] = useState({ features: [] });
-
+    const [issModel, setIssModel] = useState<THREE.Group | undefined>(
+        undefined
+    );
     const [altitude, setAltitude] = useState(0.1);
     const [transitionDuration, setTransitionDuration] = useState(1000);
 
@@ -42,32 +47,32 @@ export function Planet() {
         }, 500);
     }, []);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const response = await fetch(
-    //                 "../src/data/ne_110m_admin_0_countries.geojson"
-    //             );
-    //             const json = await response.json();
-    //             setGeoData(json);
-    //             console.log("Data loaded sucessfully");
-    //         } catch (err) {
-    //             console.error(err);
-    //         }
-    //     })();
-    // }, []);
     useEffect(() => {
-        // load data
-        fetch("../src/data/ne_110m_admin_0_countries.geojson")
-            .then((res) => res.json())
-            .then((countries) => {
-                setCountries(countries);
-
-                setTimeout(() => {
-                    setAltitude(0.1);
-                }, 3000);
-            });
+        (async () => {
+            try {
+                const response = await fetch(
+                    "../src/data/ne_110m_admin_0_countries.geojson"
+                );
+                const json = await response.json();
+                setCountries(json);
+                console.log("Data loaded sucessfully");
+            } catch (err) {
+                console.error(err);
+            }
+        })();
     }, []);
+    // useEffect(() => {
+    //     // load data
+    //     fetch("../src/data/ne_110m_admin_0_countries.geojson")
+    //         .then((res) => res.json())
+    //         .then((countries) => {
+    //             setCountries(countries);
+
+    //             setTimeout(() => {
+    //                 setAltitude(0.1);
+    //             }, 3000);
+    //         });
+    // }, []);
 
     // fetch("../../data/ne_110m_admin_0_countries.geojson")
     // .then((res) => res.json())
@@ -99,24 +104,59 @@ export function Planet() {
                 repeatPeriod: 1000,
             },
         ]);
+        //checkTurf(lng, lat);
     }
 
+    // function checkTurf(lng, lat) {
+    //     if (!countries) return;
+    //     const satellitePosition = turf.point([lng, lat]);
+    //     console.log(satellitePosition);
+    //     // for (const feature of countries.features) {
+    //     //     const countryPolygon = turf.multiPolygon([
+    //     //         [[feature.geometry.coordinates]],
+    //     //     ]);
+    //     //     if (booleanPointInPolygon(satellitePosition, countryPolygon)) {
+    //     //         console.log("Success");
+    //     //         //console.log(feature.properties.FORMAL_EN);
+    //     //         break;
+    //     //     } else {
+    //     //         console.log("not success");
+    //     //         break;
+    //     //     }
+    //     // }
+    // }
+    // function checkTurf(lng, lat) {
+    //     // const satellitePoint = point([lng, lat]);
+    //     // console.log(satellitePoint);
+
+    //     // for (const feature of countries.features) {
+    //     //     const countryPolygon = polygon(feature.geometry);
+    //     //     console.log(feature);
+    //     // }
+    //     // if (countries) {
+    //     for (const feature of countries.features) {
+    //         const countryPolygon = polygon(feature);
+    //         const satellitePosition = point([lng, lat]);
+    //         console.log(countryPolygon);
+    //         //console.log(satellitePosition);
+    //         // if (booleanPointInPolygon(satellitePosition, countryPolygon)) {
+    //         //     console.log(true);
+    //         //     break;
+    //         // }
+    //     }
+    //     // }
+    //     return null;
+    // }
+
     const colorInterpolator = (t: number) =>
-        `rgba(255,100,50,${Math.sqrt(1 - t)})`;
+        `rgba(255,255,255,${Math.sqrt(1 - t)})`;
 
-    const issStation = useMemo(() => {
-        if (!globeRadius) return undefined;
-
-        const satGeometry = new THREE.OctahedronGeometry(
-            (SAT_SIZE * globeRadius) / EARTH_RADIUS_KM / 2,
-            0
-        );
-        const satMaterial = new THREE.MeshLambertMaterial({
-            color: "palegreen",
-            transparent: true,
-            opacity: 0.7,
+    useEffect(() => {
+        const loader = new FBXLoader();
+        loader.load("../../src/assets/models/iss/iss.fbx", (model) => {
+            model.scale.set(1, 1, 1);
+            setIssModel(model);
         });
-        return new THREE.mesh(satGeometry, satMaterial);
     }, []);
 
     useEffect(() => {
@@ -135,22 +175,22 @@ export function Planet() {
                 objectLng='lng'
                 objectAltitude='alt'
                 objectFacesSurfaces={false}
-                objectThreeObject={issStation}
+                objectThreeObject={issModel}
                 ringsData={ringsData}
                 ringColor={() => colorInterpolator}
                 ringMaxRadius='maxR'
                 ringPropagationSpeed='propagationSpeed'
                 ringRepeatPeriod='repeatPeriod'
-                polygonsData={countries.features}
                 ringAltitude={0.02}
+                //polygonsData={countries.features}
                 polygonAltitude={0.001}
-                polygonCapColor={() => "rgba(0, 0, 0, 0)"}
+                polygonCapColor={() => "rgba(0, 0, 0, 0.0)"}
                 polygonSideColor={() => "rgba(0, 0, 0, 0.0)"}
-                polygonStrokeColor={() => "steelblue"}
-                // polygonLabel={({ properties: d }) => `
-                //   <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
-                //   Population: <i>${Math.round(+d.POP_EST / 1e4) / 1e2}M</i>
-                // `}
+                polygonStrokeColor={() => "rgba(70, 130, 180, .2)"}
+                polygonLabel={({ properties: d }) => `
+                  <b>${d.ADMIN} (${d.ISO_A2})</b> <br />
+                  Population: <i>${Math.round(+d.POP_EST / 1e4) / 1e2}M</i>
+                `}
                 polygonsTransitionDuration={transitionDuration}
             />
         </div>
