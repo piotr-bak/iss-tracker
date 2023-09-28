@@ -5,7 +5,11 @@
     left: 100px;
     top: 100px;
     z-index: 20;
-    background-color: rgb(78, 78, 78);
+    background-color: hsl(0 0% 31% /0.5);
+    color: orange;
     border: 5px solid orange;
     border-radius: 10px;
+    text-align: center;
+    font-family: sans-serif;
+    display: none;
 }
