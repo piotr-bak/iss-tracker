@@ -46,7 +46,7 @@ export function Satellite() {
         const { phi, theta } = geoToSpherical(lat, lon);
         const x = 0;
         const y = theta;
-        const z = phi * Math.PI * 0.5;
+        const z = phi * Math.PI * 0.33;
         return new THREE.Euler(x, y, z);
     }
 
