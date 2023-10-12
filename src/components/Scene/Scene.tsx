@@ -7,6 +7,12 @@ export function Scene() {
     return (
         <div className={styles.container}>
             <Canvas>
+                <ambientLight intensity={1} />
+                <directionalLight
+                    color='#fffff5'
+                    position={[0, 0, 5]}
+                    intensity={5}
+                />
                 <OrbitControls />
                 <Stars
                     radius={150}
@@ -16,7 +22,6 @@ export function Scene() {
                     saturation={0}
                     speed={1}
                 />
-                <ambientLight />
                 <Globe />
             </Canvas>
         </div>

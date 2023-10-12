@@ -1,24 +1,21 @@
 import { useEffect, useRef } from "react";
-import * as satellite from "satellite.js";
+import { Satellite } from "../Satellite/Satellite.tsx";
 import { useFrame, useLoader } from "@react-three/fiber";
+import { Sphere } from "@react-three/drei";
 import * as THREE from "three";
 import textureEarthDay from "../../assets/textures/2k_earth_daymap.jpg";
+import { MODEL_SCALE } from "../../constants/earthConstants.js";
 
 export function Globe() {
-    const base = new THREE.TextureLoader().load(textureEarthDay);
+    const base = useLoader(THREE.TextureLoader, textureEarthDay);
     const ref = useRef();
-    useFrame(() => {
-        ref.current.rotation.y += 0.001;
-    });
-    useEffect(() => {
-        ref.current.rotation.x = 0.41;
-    }, []);
 
     return (
-        <mesh visible castShadow ref={ref}>
-            <directionalLight intensity={0.5} />
-            <sphereGeometry attach='geometry' args={[2, 128, 64]} />
-            <meshBasicMaterial map={base} />
-        </mesh>
+        <>
+            <Sphere castShadow ref={ref} args={[MODEL_SCALE, 128, 64]}>
+                <meshStandardMaterial map={base} />
+            </Sphere>
+            <Satellite />
+        </>
     );
 }
