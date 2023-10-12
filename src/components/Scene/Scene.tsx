@@ -7,7 +7,7 @@ export function Scene() {
     return (
         <div className={styles.container}>
             <Canvas>
-                <ambientLight intensity={1} />
+                <ambientLight intensity={0.3} />
                 <directionalLight
                     color='#fffff5'
                     position={[0, 0, 5]}
