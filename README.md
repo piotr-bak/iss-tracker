@@ -1,27 +1,33 @@
-# React + TypeScript + Vite
+# ISS Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a 3d satellite tracker app, showing the current position of ISS.
+The orbit of the Station is calculated using Two-Line Element Set ([TLE](https://en.wikipedia.org/wiki/Two-line_element_set)) data, provided by [CelesTrak](https://celestrak.org/) - a non-profit run by [T.S. Kelso](https://twitter.com/TSKelso)
 
-Currently, two official plugins are available:
+## About the app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Intro
 
-## Expanding the ESLint configuration
+This is a React/TypeScript/Vite app I'm developing to explore the Three.js library and the React Three Fiber renderer.
+All orbital calculations are performed using [Satellite-js](https://github.com/shashwatak/satellite-js) library by [Shashwat Kandadai](https://github.com/shashwatak/) (which is a port of a [Brandon Rhode's sgp4 python library](https://pypi.python.org/pypi/sgp4/))
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+To get started, make sure you have [Node.js](https://nodejs.org/) installed on your machine. This project uses [Jest](https://jestjs.io/) as the testing framework.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+1. Clone this repository to your local machine:
+
+```javascript
+git clone https://github.com/piotr-bak/iss-tracker
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Navigate to the project directory:
+
+```javascript
+cd array-methods-implementation
+```
+
+3. Install the project dependencies:
+
+```javascript
+pnpm install
+```
