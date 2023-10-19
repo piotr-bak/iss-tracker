@@ -53,6 +53,13 @@ export function Satellite() {
     return (
         <group position={position} rotation={rotation}>
             <primitive object={fbx} scale={0.02} />
+            <spotLight
+                position={[0, 0, 0]}
+                penumbra={1}
+                decay={2}
+                intensity={5}
+                color={"#b7c0d7"}
+            />
         </group>
     );
 }
