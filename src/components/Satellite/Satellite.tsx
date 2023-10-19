@@ -17,7 +17,11 @@ export function Satellite() {
         new THREE.Vector3()
     );
     const [rotation, setRotation] = useState<THREE.Euler>(new THREE.Euler());
-    const fbx = useLoader(FBXLoader, "/assets/models/iss/iss.fbx");
+    const fbx = useLoader(
+        FBXLoader,
+        import.meta.env.BASE_URL + "assets/models/iss/iss.fbx"
+        //import.meta.env.BASE_URL + "/assets/models/iss/iss.fbx"
+    );
 
     useEffect(() => {
         const satrec = satellite.twoline2satrec(
@@ -48,7 +52,7 @@ export function Satellite() {
 
     return (
         <group position={position} rotation={rotation}>
-            <primitive object={fbx} scale={0.01} />
+            <primitive object={fbx} scale={0.02} />
         </group>
     );
 }
