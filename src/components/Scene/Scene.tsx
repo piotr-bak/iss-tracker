@@ -1,17 +1,18 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
-import { Globe } from "../Globe/Globe.tsx";
+import { Earth } from "../Earth/Earth.tsx";
+import { Satellite } from "../Satellite/Satellite.tsx";
 import styles from "./Scene.module.scss";
 
 export function Scene() {
     return (
         <div className={styles.container}>
             <Canvas>
-                <ambientLight intensity={0.3} />
+                <ambientLight intensity={0.4} />
                 <directionalLight
                     color='#fffff5'
                     position={[0, 0, 5]}
-                    intensity={5}
+                    intensity={10}
                 />
                 <OrbitControls />
                 <Stars
@@ -22,7 +23,8 @@ export function Scene() {
                     saturation={0}
                     speed={1}
                 />
-                <Globe />
+                <Earth />
+                <Satellite />
             </Canvas>
         </div>
     );

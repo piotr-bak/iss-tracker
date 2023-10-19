@@ -48,7 +48,7 @@ export function Satellite() {
 
     return (
         <group position={position} rotation={rotation}>
-            <primitive object={fbx} scale={0.02} />
+            <primitive object={fbx} scale={0.01} />
         </group>
     );
 }
