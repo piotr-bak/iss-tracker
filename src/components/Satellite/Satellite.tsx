@@ -1,5 +1,5 @@
 import { useLoader } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
 import * as THREE from "three";
 import * as satellite from "satellite.js";
@@ -12,7 +12,7 @@ import {
 const TLE = `1 25544U 98067A   23262.35054104  .00014745  00000-0  27129-3 0  9992
 2 25544  51.6415 222.0994 0005856  35.8467 129.0291 15.49409802416398`;
 
-export function Satellite() {
+export const Satellite = forwardRef((props, ref) => {
     const [position, setPosition] = useState<THREE.Vector3>(
         new THREE.Vector3()
     );
@@ -51,15 +51,16 @@ export function Satellite() {
     }, []);
 
     return (
-        <group position={position} rotation={rotation}>
+        <group ref={ref} position={position} rotation={rotation} {...props}>
             <primitive object={fbx} scale={0.02} />
             <spotLight
                 position={[0, 0, 0]}
-                penumbra={1}
+                penumbra={0.5}
                 decay={2}
                 intensity={5}
-                color={"#b7c0d7"}
+                color={"#506886"} //Moonlight white
+                angle={0.8}
             />
         </group>
     );
-}
+});
