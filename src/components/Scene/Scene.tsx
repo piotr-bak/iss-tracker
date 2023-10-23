@@ -4,11 +4,18 @@ import { Earth } from "../Earth/Earth.tsx";
 import { Satellite } from "../Satellite/Satellite.tsx";
 import { useRef } from "react";
 import { DEFAULT_VECTOR } from "../../constants/earthConstants.ts";
+import { useFetch } from "../../hooks/useFetch.ts";
+import { ORBITAL_DATA_URL } from "../../constants/orbitalDataUrl.ts";
 
 export function Scene() {
     const issRef = useRef();
     const { camera } = useThree();
     const isInitialPositionSet = useRef(false);
+    const tle = useFetch({
+        url: ORBITAL_DATA_URL,
+        options: undefined,
+        logErrors: true,
+    });
 
     useFrame(() => {
         if (issRef.current) {
@@ -25,8 +32,8 @@ export function Scene() {
     });
     return (
         <>
-            <PerspectiveCamera makeDefault position={[0, 0, 3]} />
-            <OrbitControls minDistance={2.75} maxDistance={50} />
+            <PerspectiveCamera makeDefault position={[0, 0, 0]} />
+            <OrbitControls minDistance={3} maxDistance={50} />
             <ambientLight intensity={1} />
             <directionalLight
                 color='#fffff5'
@@ -42,7 +49,10 @@ export function Scene() {
                 speed={1}
             />
             <Earth />
-            <Satellite ref={issRef} />
+            {/* {console.log(tleData.data)} */}
+            {tle.data !== undefined && (
+                <Satellite tleData={tle.data} ref={issRef} />
+            )}
         </>
     );
 }

@@ -16,7 +16,7 @@ export function useFetch<T>({
     options,
     logErrors = true,
 }: FetchArguments): FetchResult<T> {
-    const [data, setData] = useState<T | undefined>(undefined);
+    const [data, setData] = useState<string | undefined>(undefined);
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -39,8 +39,10 @@ export function useFetch<T>({
                     }: ${serverErrorCodes.get(response.status)}`;
                     throw new Error(message);
                 } else {
-                    const json = await response.json();
-                    setData(json);
+                    //expects a plain text here (and not JSON) because TLE orbital data
+                    //is provided as a plain text
+                    const text = await response.text();
+                    setData(text);
                 }
             } catch (error) {
                 if (error instanceof Error) {

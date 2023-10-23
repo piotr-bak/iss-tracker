@@ -10,13 +10,13 @@ export function Clouds() {
 
     useFrame((_, delta) => {
         if (ref.current) {
-            ref.current.rotation.y += 0.005 * delta;
-            ref.current.rotation.z += 0.005 * delta;
+            ref.current.rotation.y += 0.003 * delta;
+            ref.current.rotation.z += 0.003 * delta;
         }
     });
 
     return (
-        <Sphere args={[MODEL_SCALE + 0.004, 128, 64]} ref={ref}>
+        <Sphere args={[MODEL_SCALE + 0.01, 128, 64]} ref={ref}>
             <meshPhongMaterial alphaMap={clouds} transparent />
         </Sphere>
     );

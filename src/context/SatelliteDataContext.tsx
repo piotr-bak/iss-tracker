@@ -5,20 +5,17 @@ import {
     useContext,
     useState,
 } from "react";
+
+import { SatData } from "../types/SatelliteDataType.ts";
+
 import { SATELLITE_DATA_OBJECT } from "../constants/satelliteDataObject.ts";
 
-type SatelliteData = {
-    lat: number;
-    lon: number;
-    alt: number;
+type SatContextType = {
+    satData: SatData;
+    setSatData: Dispatch<SetStateAction<SatData>>;
 };
 
-type SatelliteContextType = {
-    satData: SatelliteData;
-    setSatData: Dispatch<SetStateAction<SatelliteData>>;
-};
-
-export const SatelliteDataContext = createContext<SatelliteContextType>({
+export const SatDataContext = createContext<SatContextType>({
     satData: SATELLITE_DATA_OBJECT,
     setSatData: () => {},
 });
@@ -30,12 +27,12 @@ export function SatelliteDataContextProvider({
 }) {
     const [satData, setSatData] = useState(SATELLITE_DATA_OBJECT);
     return (
-        <SatelliteDataContext.Provider value={{ satData, setSatData }}>
+        <SatDataContext.Provider value={{ satData, setSatData }}>
             {children}
-        </SatelliteDataContext.Provider>
+        </SatDataContext.Provider>
     );
 }
 
 export function useSatDataContext() {
-    return useContext(SatelliteDataContext);
+    return useContext(SatDataContext);
 }

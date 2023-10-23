@@ -1,11 +1,12 @@
-export type SatelliteDataType = {
+export type SatData = {
+    satName: string;
     lat: number;
     lon: number;
     alt: number;
 };
 
-export interface SatelliteDataProviderType extends SatelliteDataType {
+export interface SatDataProviderType extends SatData {
     setSatData: (
-        data: SatelliteDataType
-    ) => React.Dispatch<React.SetStateAction<SatelliteDataType>>;
+        data: SatData
+    ) => React.Dispatch<React.SetStateAction<SatData>>;
 }
