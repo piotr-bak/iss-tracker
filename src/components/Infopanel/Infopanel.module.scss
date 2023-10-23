@@ -1,20 +1,40 @@
+@import url("https://fonts.cdnfonts.com/css/nasalization");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
+
 .panel {
     position: absolute;
-    width: 250px;
-    left: 5vw;
-    bottom: 10vh;
+    width: 361px;
+    left: 2.5vw;
+    bottom: 5vh;
     z-index: 20;
-    background-color: hsl(0 0% 31% /0.5);
+    background-color: hsl(0 0% 0% /0.6);
+    // color: hsl(213, 25%, 92%);
     color: orange;
-    border: 5px solid orange;
-    border-radius: 10px;
-    text-align: center;
+    border-radius: 16px;
     font-family: sans-serif;
     display: block;
     text-align: left;
-    padding: 1rem 5ch;
+    padding: 0px 5ch 1rem;
+    box-shadow: 1px 1px 40px 10px #867950;
+}
+
+h1 {
+}
+
+.header {
+    background-color: solid transparent;
+    font: {
+        family: "Nasalization Rg", sans-serif;
+        size: 1.5em;
+    }
+    text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
 .infobox {
     line-height: 1.3em;
+    font: {
+        family: "Space Grotesk", sans-serif;
+        size: 1.2em;
+    }
 }
