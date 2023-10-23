@@ -10,8 +10,8 @@ export function Clouds() {
 
     useFrame((_, delta) => {
         if (ref.current) {
-            ref.current.rotation.y += 0.0025 * delta;
-            ref.current.rotation.z += 0.0025 * delta;
+            ref.current.rotation.y += 0.002 * delta;
+            ref.current.rotation.z += 0.002 * delta;
         }
     });
 
