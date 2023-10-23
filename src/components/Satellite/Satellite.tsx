@@ -48,7 +48,7 @@ export const Satellite = forwardRef((props, ref) => {
                 setPosition(calcSatPosition(lon, lat, alt));
                 setRotation(calcSatRotation(lat, lon));
             }
-        }, 333);
+        }, 100);
         return () => {
             clearInterval(interval);
         };
