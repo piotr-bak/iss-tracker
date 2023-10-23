@@ -8,11 +8,13 @@ import {
     calcSatPosition,
     calcSatRotation,
 } from "../../utils/satelliteHelpers.ts";
+import { useSatDataContext } from "../../context/SatelliteDataContext.tsx";
 
 const TLE = `1 25544U 98067A   23262.35054104  .00014745  00000-0  27129-3 0  9992
 2 25544  51.6415 222.0994 0005856  35.8467 129.0291 15.49409802416398`;
 
 export const Satellite = forwardRef((props, ref) => {
+    const satData = useSatDataContext();
     const [position, setPosition] = useState<THREE.Vector3>(
         new THREE.Vector3()
     );
@@ -40,6 +42,8 @@ export const Satellite = forwardRef((props, ref) => {
                 const lat = satellite.degreesLat(gdPos.latitude);
                 const lon = satellite.degreesLong(gdPos.longitude);
                 const alt = gdPos.height;
+
+                satData.setSatData({ lat, lon, alt });
 
                 setPosition(calcSatPosition(lon, lat, alt));
                 setRotation(calcSatRotation(lat, lon));

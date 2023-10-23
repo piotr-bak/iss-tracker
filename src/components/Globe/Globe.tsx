@@ -15,7 +15,7 @@ export function Globe() {
             <meshStandardMaterial
                 map={baseMap}
                 bumpMap={bumpMap}
-                bumpScale={0.005}
+                bumpScale={0.01}
             />
         </Sphere>
     );

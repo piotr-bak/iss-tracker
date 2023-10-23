@@ -1,4 +1,4 @@
-import { Vector3, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import { Earth } from "../Earth/Earth.tsx";
 import { Satellite } from "../Satellite/Satellite.tsx";
@@ -8,26 +8,28 @@ import { DEFAULT_VECTOR } from "../../constants/earthConstants.ts";
 export function Scene() {
     const issRef = useRef();
     const cameraRef = useRef();
-    const initialPositionSet = useRef(false);
+    const isInitialPositionSet = useRef(false);
 
     useFrame(() => {
         if (
-            !initialPositionSet.current &&
+            !isInitialPositionSet.current &&
+            issRef.current &&
             !issRef.current.position.equals(DEFAULT_VECTOR)
         ) {
-            cameraRef.current.position.lerp(issRef.current.position, 1);
+            cameraRef.current.position.copy(issRef.current.position);
+            console.log("render frame");
             cameraRef.current.lookAt([0, 0, 0]);
-            initialPositionSet.current = true;
+            isInitialPositionSet.current = true;
         }
     });
     return (
         <>
             <PerspectiveCamera
                 makeDefault
-                position={[0, 0, 3.5]}
+                position={[0, 0, 3.25]}
                 ref={cameraRef}
             />
-            <OrbitControls minDistance={3.5} maxDistance={50} />
+            <OrbitControls minDistance={3.25} maxDistance={50} />
             <ambientLight intensity={0.2} />
             <directionalLight
                 color='#fffff5'
