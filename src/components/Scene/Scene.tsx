@@ -1,3 +1,4 @@
+import { Group } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import { Earth } from "../Earth/Earth.tsx";
@@ -8,7 +9,7 @@ import { useFetch } from "../../hooks/useFetch.ts";
 import { ORBITAL_DATA_URL } from "../../constants/orbitalDataUrl.ts";
 
 export function Scene() {
-    const issRef = useRef();
+    const issRef = useRef<Group>(null);
     const { camera } = useThree();
     const isInitialPositionSet = useRef(false);
     const tle = useFetch({
@@ -49,10 +50,7 @@ export function Scene() {
                 speed={1}
             />
             <Earth />
-            {/* {console.log(tleData.data)} */}
-            {tle.data !== undefined && (
-                <Satellite tleData={tle.data} ref={issRef} />
-            )}
+            {tle.data && <Satellite tleData={tle.data} ref={issRef} />}
         </>
     );
 }

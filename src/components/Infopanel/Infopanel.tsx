@@ -5,9 +5,7 @@ export function Infopanel() {
     const info = useSatDataContext();
     return (
         <div className={styles.panel}>
-            <div className={styles.header}>
-                <h1>ISS Tracker</h1>
-            </div>
+            <h1>ISS Tracker</h1>
             <div className={styles.infobox}>
                 <p>Current {info.satData.satName} position:</p>
                 <p>

@@ -1,3 +1,7 @@
+export type TLEData = {
+    tleData: string;
+};
+
 export type SatData = {
     satName: string;
     lat: number;

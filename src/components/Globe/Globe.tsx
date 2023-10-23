@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Mesh, SphereGeometry } from "three";
 import { Sphere, useTexture } from "@react-three/drei";
 import textureEarth from "/assets/textures/earth.webp";
 import textureBumpMap from "/assets/textures/bump.webp";
@@ -8,7 +9,7 @@ export function Globe() {
     const baseMap = useTexture(textureEarth);
     const bumpMap = useTexture(textureBumpMap);
 
-    const ref = useRef<THREE.Mesh<THREE.SphereGeometry>>(null);
+    const ref = useRef<Mesh<SphereGeometry>>(null);
 
     return (
         <Sphere castShadow ref={ref} args={[MODEL_SCALE, 128, 64]}>

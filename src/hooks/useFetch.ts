@@ -6,16 +6,16 @@ type FetchArguments = {
     options?: RequestInit;
     logErrors: boolean;
 };
-type FetchResult<T> = {
-    data: T | undefined;
+type FetchResult = {
+    data: string | undefined;
     isError: boolean;
     isLoading: boolean;
 };
-export function useFetch<T>({
+export function useFetch({
     url,
     options,
     logErrors = true,
-}: FetchArguments): FetchResult<T> {
+}: FetchArguments): FetchResult {
     const [data, setData] = useState<string | undefined>(undefined);
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
