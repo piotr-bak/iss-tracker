@@ -53,8 +53,8 @@ export function calcSatRotation(lat: number, lon: number): THREE.Euler {
     //Magic numbers below are for visual purposes only - so the ISS looks better
     //on the screen. If you want to reflect actual ISS rotation, listed default values
     //may be a better starting point
-    const x = Math.PI / 2; //Pitch, default: 0;
-    const y = Math.PI * 0.66; //Yaw, default: theta;
-    const z = Math.PI * 0.02; //Roll, default: phi * Math.PI;
+    const x = 2; //Pitch, default: 0;
+    const y = theta * Math.PI; //Yaw, default: theta;
+    const z = phi * Math.PI * 1.2; //Roll, default: phi * Math.PI;
     return new THREE.Euler(x, y, z);
 }

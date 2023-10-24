@@ -1,37 +1,79 @@
 @import url("https://fonts.cdnfonts.com/css/nasalization");
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&family=Space+Mono&display=swap");
 
 .panel {
     position: absolute;
-    width: 361px;
-    left: 2.5vw;
-    bottom: 5vh;
+    width: 100%;
+    bottom: 0;
     z-index: 20;
-    background-color: hsl(0 0% 0% /0.6);
-    // color: hsl(213, 25%, 92%);
+    background-color: hsl(0 0% 0% /0.8);
     color: orange;
-    border-radius: 16px;
+    border-radius: 0px;
     font-family: sans-serif;
     display: block;
     text-align: left;
-    padding: 0px 5ch 1rem;
+    padding: 1rem 5ch 1rem;
     box-shadow: 1px 1px 40px 10px #867950;
 }
 
 h1 {
-    background-color: solid transparent;
     font: {
         family: "Nasalization Rg", sans-serif;
-        size: 1.5em;
+        size: 1.3em;
     }
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 11px;
 }
 
 .infobox {
-    line-height: 1.3em;
+    line-height: 1.5em;
     font: {
         family: "Space Grotesk", sans-serif;
-        size: 1.2em;
+        size: 1em;
+    }
+}
+
+.monospace {
+    font: {
+        family: "Space Mono", monospace;
+        size: 0.9em;
+    }
+    padding-left: 1ch;
+}
+
+@media screen and (min-width: 600px) {
+    .panel {
+        position: absolute;
+        width: 361px;
+        left: 2.5vw;
+        bottom: 5vh;
+        z-index: 20;
+        background-color: hsl(0 0% 0% /0.6);
+        // color: hsl(213, 25%, 92%);
+        color: orange;
+        border-radius: 16px;
+        font-family: sans-serif;
+        display: block;
+        text-align: left;
+        box-shadow: 1px 1px 40px 10px #867950;
+    }
+    h1 {
+        font: {
+            size: 1.5em;
+        }
+    }
+    .infobox {
+        line-height: 1.3em;
+        font: {
+            family: "Space Grotesk", sans-serif;
+            size: 1.2em;
+        }
+    }
+    .monospace {
+        font: {
+            family: "Space Mono", monospace;
+            size: 0.95em;
+        }
+        padding-left: 1ch;
     }
 }
