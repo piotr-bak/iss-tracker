@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-
-import { SATELLITE_DATA_OBJECT } from "../constants/satelliteDataObject.ts";
 import { SatContextType } from "../types/ContextsTypes.ts";
+import { SATELLITE_DATA_OBJECT } from "../constants/satelliteDataObject.ts";
 
 export const SatDataContext = createContext<SatContextType>({
     satData: SATELLITE_DATA_OBJECT,
