@@ -16,7 +16,7 @@ import {
     calcSatPosition,
     calcSatRotation,
 } from "../../utils/satelliteHelpers.ts";
-import { useSatDataContext } from "../../context/SatelliteDataContext.tsx";
+import { useSatDataContext } from "../../contexts/SatelliteDataContext.tsx";
 import { TLEData } from "../../types/SatelliteDataType.ts";
 
 export const Satellite = forwardRef(
@@ -63,11 +63,11 @@ export const Satellite = forwardRef(
                     <primitive object={fbx} scale={0.02} />
                     <spotLight
                         position={[0, 0, 0]}
-                        penumbra={0.5}
+                        penumbra={0.2}
                         decay={2}
                         intensity={5}
                         color={"#506886"} //Moonlight white
-                        angle={0.8}
+                        angle={1}
                     />
                 </group>
             </>
