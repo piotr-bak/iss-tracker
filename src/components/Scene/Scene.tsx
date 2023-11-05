@@ -38,7 +38,7 @@ export function Scene() {
         <>
             <PerspectiveCamera makeDefault position={[0, 0, 0]} />
             <OrbitControls minDistance={3} maxDistance={50} />
-            <ambientLight intensity={1} />
+            <ambientLight intensity={0.2} />
             <directionalLight
                 color='#fffff5'
                 position={[0, 0, 5]}

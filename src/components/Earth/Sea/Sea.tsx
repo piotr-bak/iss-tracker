@@ -1,5 +1,5 @@
 import { Sphere, useTexture } from "@react-three/drei";
-import { MODEL_SCALE } from "../../constants/earthConstants.ts";
+import { MODEL_SCALE } from "../../../constants/earthConstants.ts";
 import textureAlphaMap from "/assets/textures/alpha.webp";
 
 export function Sea() {
