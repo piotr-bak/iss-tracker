@@ -14,15 +14,18 @@
     text-align: left;
     padding: 1rem 5ch 1rem;
     box-shadow: 1px 1px 40px 10px #867950;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 h1 {
     font: {
         family: "Nasalization Rg", sans-serif;
-        size: 1.3em;
+        size: 2em;
+        weight: 400;
     }
     text-transform: uppercase;
-    letter-spacing: 11px;
+    letter-spacing: 8px;
 }
 
 .infobox {
@@ -49,24 +52,19 @@ h1 {
         bottom: 5vh;
         z-index: 20;
         background-color: hsl(0 0% 0% /0.6);
-        // color: hsl(213, 25%, 92%);
-        color: orange;
         border-radius: 16px;
-        font-family: sans-serif;
-        display: block;
-        text-align: left;
-        box-shadow: 1px 1px 40px 10px #867950;
-    }
-    h1 {
-        font: {
-            size: 1.5em;
-        }
+        box-shadow: 1px 1px 40px 5px #867950;
     }
     .infobox {
         line-height: 1.3em;
         font: {
             family: "Space Grotesk", sans-serif;
             size: 1.2em;
+        }
+    }
+    h1 {
+        font: {
+            size: 2.5em;
         }
     }
     .monospace {
