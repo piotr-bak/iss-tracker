@@ -15,7 +15,7 @@
   "dependencies": {
     "@react-three/drei": "^9.86.3",
     "@react-three/fiber": "^8.14.4",
-    "@react-three/postprocessing": "^2.15.1",
+    "@react-three/postprocessing": "^2.15.6",
     "@types/three": "^0.156.0",
     "postprocessing": "^6.33.2",
     "react": "^18.2.0",
@@ -37,6 +37,7 @@
     "sass": "^1.67.0",
     "sass-loader": "^13.3.2",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vite-plugin-string": "^1.2.2"
   }
 }

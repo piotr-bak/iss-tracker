@@ -1,5 +1,5 @@
 export type TLEData = {
-    tleData: string;
+    tleData: string[];
 };
 
 export type SatData = {

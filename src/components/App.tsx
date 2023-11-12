@@ -9,15 +9,15 @@ import { LoadingScreen } from "./LoadingScreen/LoadingScreen.tsx";
 export function App() {
     return (
         <div className='container'>
-            <LoadingContextProvider>
-                <LoadingScreen />
-                <SatelliteDataContextProvider>
-                    <Canvas>
-                        <Scene />
-                    </Canvas>
-                    <Infopanel />
-                </SatelliteDataContextProvider>
-            </LoadingContextProvider>
+            {/* <LoadingContextProvider>
+                <LoadingScreen /> */}
+            <SatelliteDataContextProvider>
+                <Canvas>
+                    <Scene />
+                </Canvas>
+                <Infopanel />
+            </SatelliteDataContextProvider>
+            {/* </LoadingContextProvider> */}
         </div>
     );
 }

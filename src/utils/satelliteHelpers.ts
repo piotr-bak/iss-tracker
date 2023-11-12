@@ -1,24 +1,6 @@
 import { Euler, Vector3 } from "three";
 import { EARTH_RADIUS, MODEL_SCALE } from "../constants/earthConstants.ts";
 
-export function splitTLE(tleData: string) {
-    if (typeof tleData !== "string") {
-        throw new Error(
-            `TLE data is not a string. Received ${typeof tleData} instead.`
-        );
-    }
-    const lines = tleData.split("\n").map((line) => line.trim());
-    if (lines.length >= 2) {
-        // Returns the 1st line as the satellite name and the 2nd and 3rd line as the orbit data
-        return {
-            satName: lines[0],
-            orbitData: [lines[1], lines[2]],
-        };
-    } else {
-        throw new Error("Invalid TLE data format");
-    }
-}
-
 export function degreesToRadians(deg: number): number {
     return deg * (Math.PI / 180);
 }
