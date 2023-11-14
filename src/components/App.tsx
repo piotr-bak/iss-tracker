@@ -5,6 +5,7 @@ import { Infopanel } from "./Infopanel/Infopanel.tsx";
 import "./App.scss";
 import { LoadingContextProvider } from "../contexts/LoadingContext.tsx";
 import { LoadingScreen } from "./LoadingScreen/LoadingScreen.tsx";
+import { useMemo } from "react";
 
 export function App() {
     return (

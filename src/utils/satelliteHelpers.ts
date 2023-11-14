@@ -31,12 +31,8 @@ export function calcSatPosition(
 
 export function calcSatRotation(lat: number, lon: number): Euler {
     const { phi, theta } = geoToSpherical(lat, lon);
-
-    //Magic numbers below are for visual purposes only - so the ISS looks better
-    //on the screen. If you want to reflect actual ISS rotation, listed default values
-    //may be a better starting point
-    const x = 2; //Pitch, default: 0;
-    const y = theta * Math.PI; //Yaw, default: theta;
-    const z = phi * Math.PI * 1.2; //Roll, default: phi * Math.PI;
+    const x = phi; //Pitch
+    const y = theta; //Yaw
+    const z = 0; //Roll
     return new Euler(x, y, z);
 }

@@ -2,7 +2,7 @@ import { Group } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Stars } from "@react-three/drei";
 import { Earth } from "../Earth/Earth.tsx";
-import { Satellite } from "../SatConstellation/Satellite/Satellite.tsx";
+import { Satellite } from "../SatConstellation/Satellite/_Satellite.tsx";
 import { useRef } from "react";
 import { useLoadingContext } from "../../contexts/LoadingContext.tsx";
 import { DEFAULT_VECTOR } from "../../constants/earthConstants.ts";
