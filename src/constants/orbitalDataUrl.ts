@@ -1,4 +1,4 @@
-import tleData from "/assets/tle-data-100-brightest.txt";
+import tleData from "/assets/tle-data-all-satellites.txt";
 
 export const ORBITAL_DATA = tleData;
 

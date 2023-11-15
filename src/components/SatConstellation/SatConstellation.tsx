@@ -60,13 +60,15 @@ export function SatConstellation() {
         <>
             {calculatedDataset &&
                 calculatedDataset.map((satelliteData) => {
-                    return (
-                        <Satellite
-                            position={satelliteData.position}
-                            rotation={satelliteData.rotation}
-                            key={window.crypto.randomUUID()}
-                        />
-                    );
+                    if (satelliteData !== undefined) {
+                        return (
+                            <Satellite
+                                position={satelliteData.position}
+                                rotation={satelliteData.rotation}
+                                key={window.crypto.randomUUID()}
+                            />
+                        );
+                    }
                 })}
         </>
     );

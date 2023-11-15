@@ -17,22 +17,20 @@ export function geoToSpherical(lat: number, lon: number, alt: number = 0) {
     };
 }
 
-export function calcSatPosition(
-    lat: number,
-    lon: number,
-    alt: number
-): THREE.Vector3 {
-    const { phi, theta, radius } = geoToSpherical(lon, lat, alt);
+export function calcSatPosition(lat: number, lon: number, alt: number) {
+    const { phi, theta, radius } = geoToSpherical(lat, lon, alt);
     const x = Math.cos(phi) * Math.cos(theta) * radius;
     const y = Math.sin(phi) * radius;
     const z = -Math.cos(phi) * Math.sin(theta) * radius;
-    return new Vector3(x, y, z);
+    //return new Vector3(x, y, z);
+    return [x, y, z];
 }
 
-export function calcSatRotation(lat: number, lon: number): Euler {
+export function calcSatRotation(lat: number, lon: number) {
     const { phi, theta } = geoToSpherical(lat, lon);
     const x = phi; //Pitch
     const y = theta; //Yaw
     const z = 0; //Roll
-    return new Euler(x, y, z);
+    //return new Euler(x, y, z);
+    return [x, y, z];
 }
