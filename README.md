@@ -1,7 +1,9 @@
 # ISS Tracker
 
 This is a 3d satellite tracker app, showing the current position of ISS.
-The orbit of the Station is calculated using Two-Line Element Set ([TLE](https://en.wikipedia.org/wiki/Two-line_element_set)) data, provided by [CelesTrak](https://celestrak.org/) - a non-profit run by [T.S. Kelso](https://twitter.com/TSKelso)
+The orbit of the Station is calculated using Two-Line Element Set ([TLE](https://en.wikipedia.org/wiki/Two-line_element_set)) data, provided by [CelesTrak](https://celestrak.org/) - a non-profit run by [T.S. Kelso](https://twitter.com/TSKelso).
+
+Ultimately, I aim at displaying position of all 8000+ existing sats without any noticeable UI lag (see the development branch) - but it's still a few steps to get there.
 
 ## About the app
 
