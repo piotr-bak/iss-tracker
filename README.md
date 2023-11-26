@@ -25,7 +25,7 @@ git clone https://github.com/piotr-bak/iss-tracker
 2. Navigate to the project directory:
 
 ```javascript
-cd array-methods-implementation
+cd iss-tracker
 ```
 
 3. Install the project dependencies:
