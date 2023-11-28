@@ -34,37 +34,63 @@ export function SatConstellation() {
         []
     );
 
+    /*
+  Raw dataset: list of TLEs in form of a string;
+  Raw dataset -> split into arrays of 3 subarrays each( 0: name, 1: TLE line 1,
+  2: TLE line 2 ) -> saved as a parsedDataset; [using map]
+  parsedDataset sent to Worker. 
+  Worker calculates rotation and position from dataset for each of Elements [map
+  over each element]
+  Worker returns array of Objects( each having satName, position and rotation keys );
+  Array returned by Worker -> saved into calculatedDataset;
+  Each Sat gets rendered according to its position and rotation [again, using map]
+  */
+
+    // useEffect(() => {
+    //     if (rawDataset.data) {
+    //         console.log("dataset length:", rawDataset.data.length);
+    //         setParsedDataset(splitDatasetIntoTLEs(rawDataset.data));
+    //     }
+    // }, [rawDataset.data]);
+
     useEffect(() => {
-        if (rawDataset.data) {
-            setParsedDataset(splitDatasetIntoTLEs(rawDataset.data));
+        //console.log(parsedDataset);
+        if (rawDataset.data && window.Worker) {
+            const encoder = new TextEncoder();
+            const transferableArray = new Uint8Array(
+                12 + 4 * Math.ceil(rawDataset.data.length / 4)
+            );
+            encoder.encodeInto(rawDataset.data, transferableArray);
+            constellationWorker.postMessage(transferableArray, [
+                transferableArray.buffer,
+            ]);
         }
     }, [rawDataset.data]);
 
     useEffect(() => {
-        console.log(parsedDataset);
-        if (parsedDataset && window.Worker) {
-            constellationWorker.postMessage(parsedDataset);
-        }
-    }, [parsedDataset]);
-
-    useEffect(() => {
         constellationWorker.onmessage = (e) => {
+            //data received onmessage will be an encoded array buffer. It must be
+            //decoded first before being pushed to state;
             setCalculatedDataset(() => e.data);
         };
-        return () => {
-            constellationWorker.terminate;
-        };
+        // return () => {
+        //     constellationWorker.terminate;
+        // };
     }, [constellationWorker, calculatedDataset]);
 
     return (
         <>
             {calculatedDataset &&
                 calculatedDataset.map((satelliteData) => {
-                    if (satelliteData !== undefined) {
+                    if (satelliteData) {
                         return (
                             <Satellite
-                                position={satelliteData.position}
-                                rotation={satelliteData.rotation}
+                                position={new Vector3().fromArray(
+                                    satelliteData.position
+                                )}
+                                rotation={new Euler().fromArray(
+                                    satelliteData.rotation
+                                )}
                                 key={window.crypto.randomUUID()}
                             />
                         );

@@ -7,12 +7,17 @@ import {
     degreesLat,
     degreesLong,
 } from "satellite.js";
-import { nameAndOrbitFromTLE } from "../utils/dataParsers.ts";
+import {
+    splitDatasetIntoTLEs,
+    nameAndOrbitFromTLE,
+} from "../utils/dataParsers.ts";
 import { calcSatPosition, calcSatRotation } from "../utils/satelliteHelpers.ts";
 
 onmessage = (event) => {
-    const dataset = event.data;
-    const result = dataset.map((item: string[]) => {
+    const decoder = new TextDecoder();
+    const dataset = decoder.decode(event.data);
+    const parsedDataset = splitDatasetIntoTLEs(dataset);
+    const result = parsedDataset.map((item: string[]) => {
         const satData = nameAndOrbitFromTLE(item);
         const satrec = twoline2satrec(
             satData.orbitData[0],
