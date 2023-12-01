@@ -10,7 +10,24 @@ export function nameAndOrbitFromTLE(tleData: string[]) {
     };
 }
 
-export function splitDatasetIntoTLEs(dataset: string): string[][] {
+export function turnIntoVector(input: string) {
+    if (!input) return;
+    const parsed = input.split(",");
+    const [x, y, z] = parsed;
+    return [Number(x), Number(y), Number(z)];
+}
+
+export function getSatPosition(satData: string[]) {
+    const [satName, position, rotation] = satData;
+    return {
+        satName,
+        position: turnIntoVector(position),
+        rotation: turnIntoVector(rotation),
+    };
+}
+export function splitDatasetIntoIndividualSatellites(
+    dataset: string
+): string[][] {
     const lines = dataset.split("\n").map((line) => line.trim());
 
     const result: string[][] = lines.reduce(
