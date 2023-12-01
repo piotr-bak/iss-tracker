@@ -3,7 +3,10 @@ import { useFetch } from "../../hooks/useFetch.ts";
 //import { ORBITAL_DATA_URL } from "../../constants/orbitalDataUrl.ts";
 import { ORBITAL_DATA } from "../../constants/orbitalDataUrl.ts";
 import { useEffect, useMemo, useState } from "react";
-import { splitDatasetIntoTLEs } from "../../utils/dataParsers.ts";
+import {
+    getSatPosition,
+    splitDatasetIntoIndividualSatellites,
+} from "../../utils/dataParsers.ts";
 import { Satellite } from "./Satellite/Satellite.tsx";
 import { Vector3, Euler } from "three";
 
@@ -14,14 +17,15 @@ export function SatConstellation() {
         logErrors: true,
     });
     const [parsedDataset, setParsedDataset] = useState<string[][]>();
-    const [calculatedDataset, setCalculatedDataset] = useState<
-        | {
-              satName: string;
-              position: Vector3;
-              rotation: Euler;
-          }[]
-        | undefined
-    >();
+    const [calculatedOrbits, setCalculatedOrbits] = useState("");
+    // <
+    //     | {
+    //           satName: string;
+    //           position: Vector3;
+    //           rotation: Euler;
+    //       }[]
+    //     | undefined
+    // >();
     const constellationWorker = useMemo(
         () =>
             new Worker(
@@ -71,18 +75,25 @@ export function SatConstellation() {
         constellationWorker.onmessage = (e) => {
             //data received onmessage will be an encoded array buffer. It must be
             //decoded first before being pushed to state;
-            setCalculatedDataset(() => e.data);
+            const decoder = new TextDecoder();
+            let result = decoder.decode(e.data);
+            result = splitDatasetIntoIndividualSatellites(result);
+            result = result.map((satellite) => getSatPosition(satellite));
+            console.log("RR", result);
+            console.log("calculated", calculatedOrbits);
+            setCalculatedOrbits(() => result);
+            console.log("calculated", calculatedOrbits);
         };
         // return () => {
         //     constellationWorker.terminate;
         // };
-    }, [constellationWorker, calculatedDataset]);
+    }, [constellationWorker, rawDataset.data]);
 
     return (
         <>
-            {calculatedDataset &&
-                calculatedDataset.map((satelliteData) => {
-                    if (satelliteData) {
+            {calculatedOrbits &&
+                calculatedOrbits.map((satelliteData) => {
+                    if (satelliteData.position && satelliteData.rotation) {
                         return (
                             <Satellite
                                 position={new Vector3().fromArray(
@@ -93,6 +104,15 @@ export function SatConstellation() {
                                 )}
                                 key={window.crypto.randomUUID()}
                             />
+                            // <>
+                            //     {/* {console.log(
+                            //         "Satellite component",
+                            //         satelliteData
+                            //     )}
+                            //     {console.log(
+                            //         Array.isArray(satelliteData.position)
+                            //     )} */}
+                            // </>
                         );
                     }
                 })}
