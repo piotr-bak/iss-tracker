@@ -39,7 +39,7 @@ export function calcSatPosition(
     lat: number,
     lon: number,
     alt: number
-): THREE.Vector3 {
+): Vector3 {
     const { phi, theta, radius } = geoToSpherical(lon, lat, alt);
     const x = Math.cos(phi) * Math.cos(theta) * radius;
     const y = Math.sin(phi) * radius;
