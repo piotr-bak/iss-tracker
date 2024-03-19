@@ -2,7 +2,6 @@
   "name": "iss-tracker",
   "private": false,
   "version": "0.0.2",
-  "homepage": "https://piotr-bak.github.io/iss-tracker/",
   "type": "module",
   "scripts": {
     "dev": "vite",
